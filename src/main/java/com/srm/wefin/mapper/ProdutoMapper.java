@@ -25,4 +25,5 @@ public interface ProdutoMapper {
 
 	@Select("SELECT * FROM produtos WHERE nome = #{nome}")
 	Optional<Produto> findByNome(String nome);
+
 }

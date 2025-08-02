@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.srm.wefin.model.RegraConversao;
+import com.srm.wefin.dto.RegraConversaoRequest;
+import com.srm.wefin.dto.RegraConversaoResponse;
 import com.srm.wefin.service.RegraConversaoService;
 
 @RestController
@@ -25,14 +26,14 @@ public class RegraConversaoController {
 	private final RegraConversaoService regraConversaoService;
 
 	@PostMapping
-	public ResponseEntity<RegraConversao> createRegra(@RequestBody RegraConversao regra) {
-		RegraConversao novaRegra = regraConversaoService.createRegra(regra);
+	public ResponseEntity<RegraConversaoResponse> createRegra(@RequestBody RegraConversaoRequest request) {
+		RegraConversaoResponse novaRegra = regraConversaoService.createRegra(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body(novaRegra);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<RegraConversao>> getAllRegras() {
-		List<RegraConversao> regras = regraConversaoService.findAll();
+	public ResponseEntity<List<RegraConversaoResponse>> getAllRegras() {
+		List<RegraConversaoResponse> regras = regraConversaoService.findAll();
 		return ResponseEntity.ok(regras);
 	}
 

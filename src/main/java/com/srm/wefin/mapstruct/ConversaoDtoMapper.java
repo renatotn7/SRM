@@ -1,12 +1,13 @@
-package com.srm.wefin.dto;
+package com.srm.wefin.mapstruct;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import com.srm.wefin.dto.ConversaoResponse;
 import com.srm.wefin.model.Transacao;
 
 @Mapper(componentModel = "spring")
-public interface ConversaoMapper {
+public interface ConversaoDtoMapper {
 
 	@Mapping(target = "produto", source = "produto.nome")
 	@Mapping(target = "moedaOrigem", source = "moedaOrigem.nome")

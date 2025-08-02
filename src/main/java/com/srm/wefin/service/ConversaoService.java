@@ -1,18 +1,19 @@
 package com.srm.wefin.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
-import com.srm.wefin.dto.ConversaoMapper;
 import com.srm.wefin.dto.ConversaoRequest;
 import com.srm.wefin.dto.ConversaoResponse;
 import com.srm.wefin.mapper.MoedaMapper;
 import com.srm.wefin.mapper.ProdutoMapper;
 import com.srm.wefin.mapper.TaxaCambioMapper;
 import com.srm.wefin.mapper.TransacaoMapper;
+import com.srm.wefin.mapstruct.ConversaoDtoMapper;
 import com.srm.wefin.model.Transacao;
 
 @Service
@@ -27,7 +28,7 @@ public class ConversaoService {
 
 	private final TransacaoMapper transacaoMapper;
 
-	private final ConversaoMapper conversaoMapper; // MapStruct mapper
+	private final ConversaoDtoMapper conversaoMapper; // MapStruct mapper
 
 	public ConversaoResponse realizarConversao(ConversaoRequest request) {
 		// 1. Validar moedas e produtos
@@ -49,11 +50,19 @@ public class ConversaoService {
 
 		// 5. Salvar a transação
 		Transacao transacao = new Transacao();
-		//TODO:tem que ver isso aqui
-		// ... (populando o objeto transacao com os dados e valores calculados)
+		transacao.setProduto(produto);
+		transacao.setValorOriginal(request.getValor());
+		transacao.setMoedaOrigem(moedaOrigem);
+		transacao.setValorFinal(valorFinal);
+		transacao.setMoedaDestino(moedaDestino);
+		transacao.setDataHora(LocalDateTime.now());
+		transacao.setTaxaAplicada(taxaCambio.getTaxa());
+		transacao.setFatorAjusteAplicado(fatorAjuste);
+
 		transacaoMapper.save(transacao);
 
 		// 6. Mapear e retornar a resposta detalhada
 		return conversaoMapper.toResponse(transacao);
+
 	}
 }
