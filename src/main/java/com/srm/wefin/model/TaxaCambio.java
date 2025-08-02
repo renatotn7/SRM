@@ -3,11 +3,13 @@ package com.srm.wefin.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class TaxaCambio {
 
 	private Long id;
@@ -18,5 +20,5 @@ public class TaxaCambio {
 
 	private BigDecimal taxa;
 
-	private LocalDateTime dataRegistro;
+	private LocalDateTime dataHora;
 }

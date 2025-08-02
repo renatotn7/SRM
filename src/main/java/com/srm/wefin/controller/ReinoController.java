@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.srm.wefin.model.Reino;
+import com.srm.wefin.dto.ReinoRequest;
+import com.srm.wefin.dto.ReinoResponse;
 import com.srm.wefin.service.ReinoService;
 
 @RestController
@@ -25,20 +26,20 @@ public class ReinoController {
 	private final ReinoService reinoService;
 
 	@PostMapping
-	public ResponseEntity<Reino> createReino(@RequestBody Reino reino) {
-		Reino novoReino = reinoService.createReino(reino);
+	public ResponseEntity<ReinoResponse> createReino(@RequestBody ReinoRequest request) {
+		ReinoResponse novoReino = reinoService.createReino(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body(novoReino);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Reino>> getAllReinos() {
-		List<Reino> reinos = reinoService.findAll();
+	public ResponseEntity<List<ReinoResponse>> getAllReinos() {
+		List<ReinoResponse> reinos = reinoService.findAll();
 		return ResponseEntity.ok(reinos);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Reino> getReinoById(@PathVariable Long id) {
-		Reino reino = reinoService.findById(id);
+	public ResponseEntity<ReinoResponse> getReinoById(@PathVariable Long id) {
+		ReinoResponse reino = reinoService.findByIdDto(id);
 		return ResponseEntity.ok(reino);
 	}
 

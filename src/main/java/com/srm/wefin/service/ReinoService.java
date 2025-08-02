@@ -6,33 +6,45 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import com.srm.wefin.dto.ReinoRequest;
+import com.srm.wefin.dto.ReinoResponse;
 import com.srm.wefin.exception.ResourceNotFoundException;
 import com.srm.wefin.mapper.ReinoMapper;
+import com.srm.wefin.mapstruct.ReinoDtoMapper;
 import com.srm.wefin.model.Reino;
 
 @Service
 @RequiredArgsConstructor
 public class ReinoService {
 
-	private final ReinoMapper reinoMapper;
+	private final ReinoMapper reinoMybatisMapper;
 
-	public Reino createReino(Reino reino) {
-		reinoMapper.save(reino);
-		return reino;
+	private final ReinoDtoMapper reinoDtoMapper;
+
+	public ReinoResponse createReino(ReinoRequest request) {
+		Reino reino = reinoDtoMapper.toEntity(request);
+		reinoMybatisMapper.save(reino);
+		return reinoDtoMapper.toResponse(reino);
 	}
 
-	public List<Reino> findAll() {
-		return reinoMapper.findAll();
+	public List<ReinoResponse> findAll() {
+		List<Reino> reinos = reinoMybatisMapper.findAll();
+		return reinoDtoMapper.toResponseList(reinos);
+	}
+
+	public ReinoResponse findByIdDto(Long id) {
+		Reino reino = reinoMybatisMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reino com ID " + id + " não encontrado."));
+		return reinoDtoMapper.toResponse(reino);
 	}
 
 	public Reino findById(Long id) {
-		return reinoMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reino com ID " + id + " não encontrado."));
+		return reinoMybatisMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reino com ID " + id + " não encontrado."));
 	}
 
 	public void deleteById(Long id) {
-		if (reinoMapper.findById(id).isEmpty()) {
+		if (reinoMybatisMapper.findById(id).isEmpty()) {
 			throw new ResourceNotFoundException("Reino com ID " + id + " não encontrado.");
 		}
-		reinoMapper.deleteById(id);
+		reinoMybatisMapper.deleteById(id);
 	}
 }
