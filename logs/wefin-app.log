@@ -2067,3 +2067,144 @@
 2025-08-03 19:36:47.086 DEBUG [http-nio-8080-exec-9] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
 2025-08-03 19:36:47.086 DEBUG [http-nio-8080-exec-9] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
 2025-08-03 19:36:47.087 DEBUG [http-nio-8080-exec-9] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.721 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.TransacaoMapper.search - ==>  Preparing: SELECT t.* FROM transacoes t WHERE (t.data_hora >= ?) ORDER BY t.data_hora DESC
+2025-08-03 20:29:21.778 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.TransacaoMapper.search - ==> Parameters: 2020-01-01T00:00(LocalDateTime)
+2025-08-03 20:29:21.870 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.TransacaoMapper.search - <==      Total: 15
+2025-08-03 20:29:21.883 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.890 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.899 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.900 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.901 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.905 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.905 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.905 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.910 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.911 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.911 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.914 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.914 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.914 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.915 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.916 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.916 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.917 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.917 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.917 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.919 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.920 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.921 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.926 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.926 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.927 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.928 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.928 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.929 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.930 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.931 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.931 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.931 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.932 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.932 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.933 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.933 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.933 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.934 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.935 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.935 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.935 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.936 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.936 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.940 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.942 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.942 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.945 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.945 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.946 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.946 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.947 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.947 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.948 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.948 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.948 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.950 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.950 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.950 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.951 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.951 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.951 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.952 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.952 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.952 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.955 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.956 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.956 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.957 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.957 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.957 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.958 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.960 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.961 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.965 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.965 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.966 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.966 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.967 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.967 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.967 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.967 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.968 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.970 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.970 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.970 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.971 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.971 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.972 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.973 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.973 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.973 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.975 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.976 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.976 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.977 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.977 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.978 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.978 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.979 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.980 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.985 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.985 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.985 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.986 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.987 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.988 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.991 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.992 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.992 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.994 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.994 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.994 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.995 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.995 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.996 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.996 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.997 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:21.997 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:21.998 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:21.999 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:21.999 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:21.999 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:22.000 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:22.000 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:22.001 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:22.001 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==>  Preparing: SELECT * FROM produtos WHERE id = ?
+2025-08-03 20:29:22.002 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:22.010 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.ProdutoMapper.findById - <==      Total: 1
+2025-08-03 20:29:22.011 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:22.011 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 1(Long)
+2025-08-03 20:29:22.012 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:29:22.013 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==>  Preparing: SELECT * FROM moedas WHERE id = ?
+2025-08-03 20:29:22.013 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - ==> Parameters: 2(Long)
+2025-08-03 20:29:22.014 DEBUG [http-nio-8080-exec-8] c.s.w.mapper.MoedaMapper.findById - <==      Total: 1
+2025-08-03 20:30:48.167 INFO [RMI TCP Connection(63)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-03 20:30:48.692 INFO [RMI TCP Connection(63)-127.0.0.1] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-03 20:30:48.736 INFO [RMI TCP Connection(63)-127.0.0.1] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
