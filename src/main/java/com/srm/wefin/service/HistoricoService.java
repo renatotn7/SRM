@@ -1,7 +1,5 @@
 package com.srm.wefin.service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import com.srm.wefin.dto.HistoricoSearchRequest;
 import com.srm.wefin.dto.TransacaoResponse;
 import com.srm.wefin.mapper.TransacaoMapper;
 import com.srm.wefin.mapstruct.TransacaoResponseDtoMapper;
@@ -32,31 +31,30 @@ public class HistoricoService {
 	 *               yyyy-MM-dd'T'HH:mm:ss - `dataFinal`: Data final no formato yyyy-MM-dd'T'HH:mm:ss
 	 * @return uma lista de DTOs de resposta de transação.
 	 */
-	public List<TransacaoResponse> search(Map<String, String> params) {
+	public List<TransacaoResponse> search(HistoricoSearchRequest request) {
 		// Mapa para armazenar os filtros com os tipos de dados corretos para o MyBatis
 		Map<String, Object> filters = new HashMap<>();
 
-		// Validação e conversão de filtros
-		if (params.containsKey("moedaId")) {
-			filters.put("moedaId", Long.parseLong(params.get("moedaId")));
+		if (request.getMoedaId() != null) {
+			filters.put("moedaId", request.getMoedaId());
 		}
-		if (params.containsKey("moedaOrigemId")) {
-			filters.put("moedaOrigemId", Long.parseLong(params.get("moedaOrigemId")));
+		if (request.getMoedaOrigemId() != null) {
+			filters.put("moedaOrigemId", request.getMoedaOrigemId());
 		}
-		if (params.containsKey("moedaDestinoId")) {
-			filters.put("moedaDestinoId", Long.parseLong(params.get("moedaDestinoId")));
+		if (request.getMoedaDestinoId() != null) {
+			filters.put("moedaDestinoId", request.getMoedaDestinoId());
 		}
-		if (params.containsKey("dataInicial")) {
-			filters.put("dataInicial", LocalDateTime.parse(params.get("dataInicial"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		if (request.getDataInicial() != null) {
+			filters.put("dataInicial", request.getDataInicial());
 		}
-		if (params.containsKey("dataFinal")) {
-			filters.put("dataFinal", LocalDateTime.parse(params.get("dataFinal"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		if (request.getDataFinal() != null) {
+			filters.put("dataFinal", request.getDataFinal());
 		}
-		if (params.containsKey("produtoId")) {
-			filters.put("produtoId", Long.parseLong(params.get("produtoId")));
+		if (request.getProdutoId() != null) {
+			filters.put("produtoId", request.getProdutoId());
 		}
-		if (params.containsKey("reinoId")) {
-			filters.put("reinoId", Long.parseLong(params.get("reinoId")));
+		if (request.getReinoId() != null) {
+			filters.put("reinoId", request.getReinoId());
 		}
 
 		// Realiza a busca no banco de dados

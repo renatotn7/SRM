@@ -14,5 +14,6 @@ public interface ConversaoDtoMapper {
 	@Mapping(target = "moedaDestino", source = "moedaDestino.nome")
 	@Mapping(target = "detalhesConversao.taxaBase", source = "taxaAplicada")
 	@Mapping(target = "detalhesConversao.fatorAjuste", source = "fatorAjusteAplicado")
+	@Mapping(target = "transacaoId", source = "id")
 	ConversaoResponse toResponse(Transacao transacao);
 }

@@ -4,10 +4,16 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.dao.PessimisticLockingFailureException;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.srm.wefin.dto.ProdutoRequest;
 import com.srm.wefin.dto.ProdutoResponse;
+import com.srm.wefin.exception.OperationFailedException;
 import com.srm.wefin.exception.ResourceNotFoundException;
 import com.srm.wefin.mapper.ProdutoMapper;
 import com.srm.wefin.mapstruct.ProdutoResponseDtoMapper;
@@ -24,6 +30,10 @@ public class ProdutoService {
 
 	private final ReinoService reinoService;
 
+	@Transactional
+	@Retryable(retryFor = { PessimisticLockingFailureException.class }, maxAttempts = 3, // Número máximo de tentativas (1 original + 2 retentativas)
+			backoff = @Backoff(delay = 1000, multiplier = 2) // Atraso inicial de 1s, dobrando a cada tentativa
+	)
 	public ProdutoResponse createProduto(ProdutoRequest request) {
 		Reino reino = reinoService.findById(request.getReinoId());
 
@@ -36,6 +46,24 @@ public class ProdutoService {
 		return produtoResponseMapper.toResponse(produto);
 	}
 
+	/**
+	 * Método de recuperação para o createProduto. É chamado se todas as retentativas do createProduto falharem devido a
+	 * PessimisticLockingFailureException.
+	 *
+	 * @param e
+	 *                A exceção que causou a falha.
+	 * @param request
+	 *                A requisição original que tentou ser processada.
+	 * @return Uma TransacaoResponse (neste caso, lança uma exceção, pois não há como recuperar sem sucesso).
+	 * @throws OperationFailedException
+	 *                                  Sempre lançada para indicar que a operação falhou após retentativas.
+	 */
+	@Recover
+	public ProdutoResponse recoverCreateProduto(PessimisticLockingFailureException e, ProdutoRequest request) {
+		System.err.println("Falha na criação do produto após várias tentativas de bloqueio pessimista/deadlock para request: " + request + " - Erro: " + e.getMessage());
+		throw new OperationFailedException("Não foi possível criar o produto devido a um problema de concorrência persistente. Por favor, tente novamente.");
+	}
+
 	public List<ProdutoResponse> findAll() {
 		List<Produto> produtos = produtoMapper.findAll();
 		return produtoResponseMapper.toResponseList(produtos);
@@ -44,5 +72,10 @@ public class ProdutoService {
 	public ProdutoResponse findById(Long id) {
 		Produto produto = produtoMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("Produto com ID " + id + " não encontrado."));
 		return produtoResponseMapper.toResponse(produto);
+	}
+
+	public Produto findEntityProdutoId(Long id) {
+		return produtoMapper.findById(id).orElse(null);
+
 	}
 }

@@ -30,23 +30,19 @@ public class ConversaoService {
 
 	private final ConversaoDtoMapper conversaoMapper; // MapStruct mapper
 
-	public ConversaoResponse realizarConversao(ConversaoRequest request) {
-		// 1. Validar moedas e produtos
-		var moedaOrigem = moedaMapper.findByNome(request.getMoedaOrigem()).orElseThrow(() -> new RuntimeException("Moeda de origem não encontrada."));
-		var moedaDestino = moedaMapper.findByNome(request.getMoedaDestino()).orElseThrow(() -> new RuntimeException("Moeda de destino não encontrada."));
-		var produto = produtoMapper.findByNome(request.getProduto()).orElseThrow(() -> new RuntimeException("Produto não encontrado."));
+	private final RegraConversaoService regraConversaoService;
 
+	public ConversaoResponse realizarConversao(ConversaoRequest request) {
+		// 1. Validar moedas, produtos e regras
+		var moedaOrigem = moedaMapper.findById(request.getMoedaOrigemId()).orElseThrow(() -> new RuntimeException("Moeda de origem não encontrada."));
+		var moedaDestino = moedaMapper.findById(request.getMoedaDestinoId()).orElseThrow(() -> new RuntimeException("Moeda de destino não encontrada."));
+		var produto = produtoMapper.findById(request.getProdutoId()).orElseThrow(() -> new RuntimeException("Produto não encontrado."));
+		var regra = regraConversaoService.findLatestRegraByProdutoId(produto.getId());
 		// 2. Buscar taxa de câmbio
 		var taxaCambio = taxaCambioMapper.findLatestTaxa(moedaOrigem.getId(), moedaDestino.getId()).orElseThrow(() -> new RuntimeException("Taxa de câmbio não disponível."));
 
-		// 3. Aplicar regra de conversão personalizada (simulada)
-		BigDecimal fatorAjuste = new BigDecimal("1.0"); // Padrão
-		if (produto.getNome().equals("Peles de Gelo")) {
-			fatorAjuste = new BigDecimal("1.10"); // Bônus de 10%
-		}
-
 		// 4. Calcular valor final
-		BigDecimal valorFinal = request.getValor().multiply(taxaCambio.getTaxa()).multiply(fatorAjuste);
+		BigDecimal valorFinal = request.getValor().multiply(taxaCambio.getTaxa()).multiply(regra.getFatorAjuste());
 
 		// 5. Salvar a transação
 		Transacao transacao = new Transacao();
@@ -57,7 +53,7 @@ public class ConversaoService {
 		transacao.setMoedaDestino(moedaDestino);
 		transacao.setDataHora(LocalDateTime.now());
 		transacao.setTaxaAplicada(taxaCambio.getTaxa());
-		transacao.setFatorAjusteAplicado(fatorAjuste);
+		transacao.setFatorAjusteAplicado(regra.getFatorAjuste());
 
 		transacaoMapper.save(transacao);
 

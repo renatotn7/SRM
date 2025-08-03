@@ -11,5 +11,5 @@ public class Produto {
 
 	private String nome;
 
-	private Reino reino; // Objeto aninhado para o relacionamento
+	private Reino reino;
 }

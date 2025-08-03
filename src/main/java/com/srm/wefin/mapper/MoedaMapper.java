@@ -21,12 +21,12 @@ public interface MoedaMapper {
 	@Select("SELECT * FROM moedas")
 	List<Moeda> findAll();
 
-	@Select("SELECT * FROM moedas WHERE id = #{id}")
-	Optional<Moeda> findById(Long id);
-
 	@Select("SELECT * FROM moedas WHERE nome = #{nome}")
 	Optional<Moeda> findByNome(String nome);
 
 	@Delete("DELETE FROM moedas WHERE id = #{id}")
 	void deleteById(Long id);
+
+	@Select("SELECT * FROM moedas WHERE id = #{id}")
+	Optional<Moeda> findById(Long id);
 }

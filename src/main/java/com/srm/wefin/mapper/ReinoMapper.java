@@ -26,4 +26,7 @@ public interface ReinoMapper {
 
 	@Delete("DELETE FROM reinos WHERE id = #{id}")
 	void deleteById(Long id);
+
+	@Select("SELECT * FROM reinos WHERE nome = #{nome}")
+	Optional<Reino> findByNome(String nome);
 }

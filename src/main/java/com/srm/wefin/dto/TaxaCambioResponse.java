@@ -10,11 +10,15 @@ public class TaxaCambioResponse {
 
 	private Long id;
 
-	private String nomeMoedaOrigem;
+	private String nomeMoedaOrigem; // Nome da moeda de origem (ex: "Ouro Real")
 
-	private String nomeMoedaDestino;
+	private String simboloMoedaOrigem; // Símbolo da moeda de origem (ex: "OR")
+
+	private String nomeMoedaDestino; // Nome da moeda de destino (ex: "Tibar")
+
+	private String simboloMoedaDestino; // Símbolo da moeda de destino (ex: "T")
 
 	private BigDecimal taxa;
 
-	private LocalDateTime dataHora;
+	private LocalDateTime dataRegistro;
 }

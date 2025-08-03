@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-class ConversaoDetalhes {
+public class ConversaoDetalhes {
 
 	private BigDecimal taxaBase;
 

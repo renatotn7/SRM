@@ -8,4 +8,6 @@ public class MoedaResponse {
 	private Long id;
 
 	private String nome;
+
+	private String simbolo;
 }

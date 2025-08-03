@@ -20,5 +20,5 @@ public class TaxaCambio {
 
 	private BigDecimal taxa;
 
-	private LocalDateTime dataHora;
+	private LocalDateTime dataRegistro;
 }
