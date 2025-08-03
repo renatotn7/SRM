@@ -123,3 +123,26 @@ COMMENT ON COLUMN transacoes.moeda_destino_id IS 'Chave estrangeira para moedas(
 COMMENT ON COLUMN transacoes.data_hora IS 'Data e hora em que a transação ocorreu';
 COMMENT ON COLUMN transacoes.taxa_aplicada IS 'Taxa de câmbio usada na transação';
 COMMENT ON COLUMN transacoes.fator_ajuste_aplicado IS 'Fator de ajuste aplicado, se existente';
+
+
+
+ALTER TABLE ONLY public.moedas
+    ADD CONSTRAINT "unique_key_moedaNome" UNIQUE (nome);
+
+
+
+ALTER TABLE ONLY public.moedas
+    ADD CONSTRAINT "unique_key_moedaSimbolo" UNIQUE (simbolo);
+
+
+ALTER TABLE ONLY public.produtos
+    ADD CONSTRAINT unique_key_produto_nome UNIQUE (nome);
+
+
+ALTER TABLE ONLY public.reinos
+    ADD CONSTRAINT unique_key_reino_nome UNIQUE (nome);
+
+
+
+ALTER TABLE ONLY public.regras_conversao
+    ADD CONSTRAINT uniquekey_datas_vigencias_precisao_e_produto_nao_devem_repetir_ UNIQUE (produto_id, data_vigencia);

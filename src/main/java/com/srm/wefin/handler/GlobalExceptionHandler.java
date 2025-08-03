@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.srm.wefin.dto.ErroResponse; // <--- Importe a nova classe de ErroResponse
@@ -74,6 +76,13 @@ public class GlobalExceptionHandler {
 		ErroResponse error = new ErroResponse(LocalDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), // "Internal Server Error"
 				"Ocorreu um erro inesperado no servidor. Por favor, tente novamente mais tarde.", request.getRequestURI());
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(NoResourceFoundException.class)
+	public ResponseEntity<ErroResponse> handleNoResourceFoundException(NoResourceFoundException ex, HttpServletRequest request) {
+		ErroResponse error = new ErroResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase(), // "Not Found"
+				ex.getMessage(), request.getRequestURI());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(ExhaustedRetryException.class)
@@ -220,6 +229,13 @@ public class GlobalExceptionHandler {
 
 		ErroResponse errorResponse = new ErroResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), errorMessage, details, request.getRequestURI());
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(NoSuchElementException.class) // Ou sua exceção personalizada como ResourceNotFoundException
+	public ResponseEntity<ErroResponse> handleNoSuchElementException(NoSuchElementException ex, HttpServletRequest request) {
+		ErroResponse error = new ErroResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase(), // "Not Found"
+				ex.getMessage(), request.getRequestURI());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 
 }

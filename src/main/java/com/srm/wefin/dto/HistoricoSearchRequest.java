@@ -41,7 +41,4 @@ public class HistoricoSearchRequest {
 	@Positive(message = "O ID do produto deve ser um número positivo.")
 	private Long produtoId;
 
-	@Schema(description = "ID do reino associado ao produto da transação.", example = "5")
-	@Positive(message = "O ID do reino deve ser um número positivo.")
-	private Long reinoId;
 }

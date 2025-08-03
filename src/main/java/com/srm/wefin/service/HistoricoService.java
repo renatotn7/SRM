@@ -42,19 +42,18 @@ public class HistoricoService {
 			filters.put("moedaOrigemId", request.getMoedaOrigemId());
 		}
 		if (request.getMoedaDestinoId() != null) {
+
 			filters.put("moedaDestinoId", request.getMoedaDestinoId());
 		}
 		if (request.getDataInicial() != null) {
-			filters.put("dataInicial", request.getDataInicial());
+			filters.put("dataInicial", request.getDataInicial().atStartOfDay());
+
 		}
 		if (request.getDataFinal() != null) {
-			filters.put("dataFinal", request.getDataFinal());
+			filters.put("dataFinal", request.getDataFinal().atStartOfDay());
 		}
 		if (request.getProdutoId() != null) {
 			filters.put("produtoId", request.getProdutoId());
-		}
-		if (request.getReinoId() != null) {
-			filters.put("reinoId", request.getReinoId());
 		}
 
 		// Realiza a busca no banco de dados

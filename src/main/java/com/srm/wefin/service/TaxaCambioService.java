@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
@@ -26,6 +28,8 @@ import com.srm.wefin.model.TaxaCambio;
 @Service
 @RequiredArgsConstructor
 public class TaxaCambioService {
+
+	private static final Logger logger = LoggerFactory.getLogger(TaxaCambioService.class);
 
 	private final TaxaCambioMapper taxaCambioMybatisMapper;
 
@@ -74,7 +78,7 @@ public class TaxaCambioService {
 
 	@Recover // Método de recuperação para createTaxaCambio
 	public TaxaCambioResponse recoverCreateTaxaCambio(PessimisticLockingFailureException e, TaxaCambioRequest request) {
-		System.err.println("Falha na criação da taxa de câmbio após várias tentativas de bloqueio/concorrência: " + e.getMessage());
+		logger.error("Falha na criação da taxa de câmbio após várias tentativas de bloqueio/concorrência. Erro: {}", e.getMessage(), e);
 		throw new OperationFailedException("Não foi possível criar a taxa de câmbio devido a um problema de concorrência. Por favor, tente novamente.");
 	}
 
@@ -106,7 +110,7 @@ public class TaxaCambioService {
 
 	@Recover // Método de recuperação para deleteById
 	public void recoverDeleteById(PessimisticLockingFailureException e, Long id) {
-		System.err.println("Falha na exclusão da taxa de câmbio (ID: " + id + ") após várias tentativas de bloqueio/concorrência: " + e.getMessage());
+		logger.error("Falha na exclusão da taxa de câmbio (ID: {}) após várias tentativas de bloqueio/concorrência. Erro: {}", id, e.getMessage(), e);
 		throw new OperationFailedException("Não foi possível excluir a taxa de câmbio devido a um problema de concorrência. Por favor, tente novamente.");
 	}
 }

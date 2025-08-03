@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.srm.wefin.dto.ConversaoRequest;
 import com.srm.wefin.dto.ConversaoResponse;
+import com.srm.wefin.exception.ResourceNotFoundException;
 import com.srm.wefin.mapper.MoedaMapper;
 import com.srm.wefin.mapper.ProdutoMapper;
 import com.srm.wefin.mapper.TaxaCambioMapper;
@@ -34,12 +35,12 @@ public class ConversaoService {
 
 	public ConversaoResponse realizarConversao(ConversaoRequest request) {
 		// 1. Validar moedas, produtos e regras
-		var moedaOrigem = moedaMapper.findById(request.getMoedaOrigemId()).orElseThrow(() -> new RuntimeException("Moeda de origem não encontrada."));
-		var moedaDestino = moedaMapper.findById(request.getMoedaDestinoId()).orElseThrow(() -> new RuntimeException("Moeda de destino não encontrada."));
-		var produto = produtoMapper.findById(request.getProdutoId()).orElseThrow(() -> new RuntimeException("Produto não encontrado."));
+		var moedaOrigem = moedaMapper.findById(request.getMoedaOrigemId()).orElseThrow(() -> new ResourceNotFoundException("Moeda de origem não encontrada."));
+		var moedaDestino = moedaMapper.findById(request.getMoedaDestinoId()).orElseThrow(() -> new ResourceNotFoundException("Moeda de destino não encontrada."));
+		var produto = produtoMapper.findById(request.getProdutoId()).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado."));
 		var regra = regraConversaoService.findLatestRegraByProdutoId(produto.getId());
 		// 2. Buscar taxa de câmbio
-		var taxaCambio = taxaCambioMapper.findLatestTaxa(moedaOrigem.getId(), moedaDestino.getId()).orElseThrow(() -> new RuntimeException("Taxa de câmbio não disponível."));
+		var taxaCambio = taxaCambioMapper.findLatestTaxa(moedaOrigem.getId(), moedaDestino.getId()).orElseThrow(() -> new ResourceNotFoundException("Taxa de câmbio não disponível."));
 
 		// 4. Calcular valor final
 		BigDecimal valorFinal = request.getValor().multiply(taxaCambio.getTaxa()).multiply(regra.getFatorAjuste());

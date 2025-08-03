@@ -13,10 +13,9 @@ public class TransacaoSqlProvider {
 				SELECT("t.*");
 				FROM("transacoes t");
 
-				// Opcional: Adicionar JOIN para filtrar por reino ou outras informações de produto
-				if (filters.containsKey("reinoId")) {
-					JOIN("produtos p ON t.produto_id = p.id");
-				}
+				/*
+				 * if (filters.containsKey("reinoId")) { JOIN("produtos p ON t.produto_id = p.id"); }
+				 */
 
 				if (filters.containsKey("moedaOrigemId")) {
 					WHERE("t.moeda_origem_id = #{moedaOrigemId}");
@@ -37,9 +36,9 @@ public class TransacaoSqlProvider {
 				if (filters.containsKey("produtoId")) {
 					WHERE("t.produto_id = #{produtoId}");
 				}
-				if (filters.containsKey("reinoId")) {
-					WHERE("p.reino_id = #{reinoId}");
-				}
+				/*
+				 * if (filters.containsKey("reinoId")) { WHERE("p.reino_id = #{reinoId}"); }(
+				 */
 
 				ORDER_BY("t.data_hora DESC");
 			}

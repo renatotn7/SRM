@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
@@ -24,6 +26,8 @@ import com.srm.wefin.model.Reino;
 @Service
 @RequiredArgsConstructor
 public class ReinoService {
+
+	private static final Logger logger = LoggerFactory.getLogger(ReinoService.class);
 
 	private final ReinoMapper reinoMybatisMapper;
 
@@ -47,7 +51,7 @@ public class ReinoService {
 
 	@Recover
 	public ReinoResponse recoverCreateReino(PessimisticLockingFailureException e, ReinoRequest request) {
-		System.err.println("Falha na criação do reino '" + request.getNome() + "' após várias tentativas de bloqueio pessimista/deadlock: " + e.getMessage());
+		logger.error("Falha na criação do reino '{}' após várias tentativas de bloqueio pessimista/deadlock para request: {} - Erro: {}", request.getNome(), request, e.getMessage(), e);
 		throw new OperationFailedException("Não foi possível criar o reino '" + request.getNome() + "' devido a um problema de concorrência. Por favor, tente novamente.");
 	}
 
@@ -77,7 +81,7 @@ public class ReinoService {
 
 	@Recover
 	public void recoverDeleteById(PessimisticLockingFailureException e, Long id) {
-		System.err.println("Falha na exclusão do reino com ID " + id + " após várias tentativas de bloqueio pessimista/deadlock: " + e.getMessage());
+		logger.error("Falha na exclusão do reino com ID {} após várias tentativas de bloqueio pessimista/deadlock. Erro: {}", id, e.getMessage(), e);
 		throw new OperationFailedException("Não foi possível excluir o reino com ID " + id + " devido a um problema de concorrência. Por favor, tente novamente.");
 	}
 }

@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="WefinApiTests" verbose="1" >
+  <test name="ConversaoControllerTests" >
+    <classes>
+      <class name="com.srm.wefin.controller.ConversaoControllerTest" />
+        <class name="com.srm.wefin.controller.HistoricoControllerTest"/>
+    </classes>
+  </test>
+
+  </suite>
