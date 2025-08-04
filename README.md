@@ -684,28 +684,45 @@ A arquitetura do projeto, com um JAR autônomo e o uso de `Dockerfile` para cont
 
 
 ### 8\. Codigo SQL (PostgresSql)
-A seguir, está o esquema (schema) do banco de dados em formato Markdown, detalhando as tabelas, seus campos, restrições e dados de exemplo.
 
-Tabela: moedas
+
+A seguir, está o esquema (schema) do banco de dados em formato Markdown, detalhando as tabelas, seus campos, restrições e dados de exemplo.
+O mesmo conteúdo abaixo(sem as marcacoes markdown) pode ser visto em [arquivo de criacao](main/resources/db.migration/v1__create_tables.sql), [arquivo de inserts](main/resources/db.migration/v2__inserts_padrao.sql)
+
+
+---
+### Tabela: `moedas`
+
 Gerencia as moedas disponíveis no sistema, como 'Ouro Real' e 'Tibar'.
 
+```sql
 CREATE TABLE moedas (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     simbolo VARCHAR(10) NOT NULL
 );
+```
 
-Tabela: reinos
+---
+
+### Tabela: `reinos`
+
 Define os reinos existentes no universo, como o 'SRM'.
 
+```sql
 CREATE TABLE reinos (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
 );
+```
 
-Tabela: produtos
+---
+
+### Tabela: `produtos`
+
 Registra os produtos que pertencem a um reino.
 
+```sql
 CREATE TABLE produtos (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -714,10 +731,15 @@ CREATE TABLE produtos (
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+```
 
-Tabela: regras_conversao
+---
+
+### Tabela: `regras_conversao`
+
 Armazena regras de ajuste (bônus ou descontos) aplicáveis a cada produto.
 
+```sql
 CREATE TABLE regras_conversao (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     produto_id INTEGER NOT NULL
@@ -727,10 +749,15 @@ CREATE TABLE regras_conversao (
     fator_ajuste NUMERIC(12,4) NOT NULL,
     data_vigencia DATE
 );
+```
 
-Tabela: taxas_cambio
+---
+
+### Tabela: `taxas_cambio`
+
 Mantém o histórico de taxas de câmbio entre as moedas.
 
+```sql
 CREATE TABLE taxas_cambio (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     moeda_origem_id INTEGER NOT NULL
@@ -744,10 +771,15 @@ CREATE TABLE taxas_cambio (
     taxa NUMERIC(18,8) NOT NULL,
     data_registro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
+```
 
-Tabela: transacoes
+---
+
+### Tabela: `transacoes`
+
 Armazena o registro de todas as transações de conversão de produtos para moedas.
 
+```sql
 CREATE TABLE transacoes (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     produto_id INTEGER NOT NULL
@@ -768,8 +800,13 @@ CREATE TABLE transacoes (
     taxa_aplicada NUMERIC(18,8) NOT NULL,
     fator_ajuste_aplicado NUMERIC(12,4)
 );
+```
 
-Seção: Definição de Restrições (Constraints)
+---
+
+### Seção: Definição de Restrições (Constraints)
+
+```sql
 -- Restrições para a tabela 'moedas'
 ALTER TABLE ONLY public.moedas ADD CONSTRAINT "unique_key_moedaNome" UNIQUE (nome);
 ALTER TABLE ONLY public.moedas ADD CONSTRAINT "unique_key_moedaSimbolo" UNIQUE (simbolo);
@@ -783,10 +820,15 @@ ALTER TABLE ONLY public.produtos ADD CONSTRAINT unique_key_produto_nome UNIQUE (
 -- Restrição para a tabela 'regras_conversao'
 ALTER TABLE ONLY public.regras_conversao
     ADD CONSTRAINT uniquekey_datas_vigencias_precisao_e_produto_nao_devem_repetir_ UNIQUE (produto_id, data_vigencia);
+```
 
-Seção: Dados de Exemplo (Inserts)
+---
+
+### Seção: Dados de Exemplo (Inserts)
+
 O trecho abaixo mostra a inserção de dados iniciais para popular o banco de dados.
 
+```sql
 -- Reino SRM
 INSERT INTO reinos (nome) VALUES ('SRM');
 
@@ -815,4 +857,3 @@ INSERT INTO transacoes (
   (SELECT id FROM moedas WHERE simbolo = 'T'), 2.5,
   NULL
 );
-
