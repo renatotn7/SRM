@@ -680,4 +680,4 @@ A arquitetura do projeto, com um JAR autônomo e o uso de `Dockerfile` para cont
 -   
 
 ### 7\. Diagrama ER
- ![Diagrama ER](Diagrama ER wefin.png)
+ ![Diagrama ER](diag_wefin.png)
