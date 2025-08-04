@@ -1,7 +1,7 @@
 
 ## Índice
 
--   [Guia de Configuração e Execução do Desafio Backend Magaluiza](#user-content-guia-de-configuração-e-execução-do-desafio-backend-magaluiza)
+-   [Guia de Configuração e Execução do Reino de wefin](#user-content-guia-de-configuração-e-execução-do-desafio-do-reino-de-wefin)
     
     -   [1 Pré-requisitos: Instalação de Ferramentas Essenciais](#user-content-1-pré-requisitos-instalação-de-ferramentas-essenciais)
         
@@ -57,12 +57,12 @@
         
     -   [4\. Ferramentas de Desenvolvimento e Teste](#user-content-4-ferramentas-de-desenvolvimento-e-teste)
         
-    -   [5\. Segurança e Documentação da API](#user-content-5-segurança-e-documentação-da-api)
+    -   [5\. Documentação da API](#user-content-5-documentação-da-api)
         
     -   [6\. Estratégia de Build com Maven e Docker](#user-content-6-estratégia-de-build-com-maven-e-docker)
         
 
-# Guia de Configuração e Execução do Desafio Backend Magaluiza
+# Guia de Configuração e Execução do Desafio do Reino de Wefin
 
 Este documento irá guiá-lo através da configuração do ambiente de desenvolvimento, compilação do projeto com Maven, execução da aplicação e seu banco de dados PostgreSQL usando Docker Compose, e como acessar o banco de dados dentro do container.
 
@@ -335,7 +335,7 @@ Agora que suas ferramentas estão instaladas, vamos preparar o projeto.
     
 2.  **Compilar o JAR Executável:**
     
-    -   Certifique-se de que você está no diretório `desafioBackendMagLuiza` (onde está o `pom.xml`).
+    -   Certifique-se de que você está no diretório raiz do projeto (onde está o `pom.xml`).
         
     -   Use o Maven para limpar e empacotar a aplicação. Este comando irá compilar o código e criar um arquivo `.jar` executável na pasta `target/`.
         
@@ -345,7 +345,7 @@ Agora que suas ferramentas estão instaladas, vamos preparar o projeto.
     ```
     mvn clean package
     ```
-    -   Após a execução bem-sucedida, você deve encontrar o arquivo `favoritos-0.0.1-SNAPSHOT.jar` dentro da pasta `target/`.
+    -   Após a execução bem-sucedida, você deve encontrar o arquivo `wefin-0.0.1-SNAPSHOT.jar` dentro da pasta `target/`.
         
 
 ---
@@ -356,7 +356,7 @@ O Docker Compose é ideal para subir a aplicação Spring Boot e o banco de dado
 
 1.  **Certifique-se de que o Docker Desktop (Windows) ou o serviço Docker (Linux) está rodando.**
     
-2.  **Navegue até o diretório raiz do projeto** (`desafioBackendMagLuiza`), onde o `docker-compose.yml` e a pasta `target/` estão.
+2.  **Navegue até o diretório raiz do projeto**  onde o `docker-compose.yml` e a pasta `target/` estão.
     
 3.  **Inicie os serviços com Docker Compose:**
     
@@ -385,7 +385,7 @@ O Docker Compose é ideal para subir a aplicação Spring Boot e o banco de dado
     
     Você deve ver `app` e `db` rodando com o status `Up`.
     
-5.  **Acessar a Aplicação:** Sua aplicação Spring Boot estará disponível em `http://localhost:8080`.
+5.  **Acessar a Aplicação:** Sua aplicação Spring Boot estará disponível em `http://localhost:8081`.
     
 
 ---
@@ -413,9 +413,9 @@ Para se conectar ao PostgreSQL a partir de um cliente SQL (como pgAdmin, DBeaver
     
 -   **Porta:** `5433`
     
--   **Nome do Banco de Dados:** `favoritos_aiqfome_db` (conforme configurado em `POSTGRES_DB`)
+-   **Nome do Banco de Dados:** `reinoSRM` (conforme configurado em `POSTGRES_DB`)
     
--   **Usuário:** `favoritos_aiqfome_user` (conforme configurado em `POSTGRES_USER`)
+-   **Usuário:** `reinoSRM_user` (conforme configurado em `POSTGRES_USER`)
     
 -   **Senha:** `1234567890` (conforme configurado em `POSTGRES_PASSWORD`)
     
@@ -425,7 +425,7 @@ Você pode, por exemplo, usar o cliente de linha de comando `psql` se ele estive
 Bash
 
 ```
-psql -h localhost -p 5433 -U favoritos_aiqfome_user -d favoritos_aiqfome_db
+psql -h localhost -p 5433 -U reinoSRM_user -d reinoSRM
 ```
 
 Ele pedirá a senha (`1234567890`).
@@ -597,13 +597,13 @@ Estes endpoints permitem que os usuários gerenciem sua lista de produtos favori
 ---
 ## Escolhas Tecnológicas no Projeto Desafio Backend Magaluiza
 
-Este documento detalha as principais escolhas tecnológicas e dependências configuradas no arquivo `pom.xml` do projeto "Desafio Backend Magazine Luiza", explicando o racional por trás de cada uma, com foco no uso do Java 21 e na compatibilidade com Docker.
+Este documento detalha as principais escolhas tecnológicas e dependências configuradas no arquivo `pom.xml` do projeto "Desafio SRM", explicando o racional por trás de cada uma, com foco no uso do Java 21 e na compatibilidade com Docker.
 
 ---
 
 ### 1\. Base do Projeto: Spring Boot e Java 21
 
-O coração do projeto é o **Spring Boot**, utilizando a versão `3.2.5` do `spring-boot-starter-parent`. Essa escolha é fundamental por diversos motivos:
+O coração do projeto é o **Spring Boot**, utilizando a versão `3.3.1` do `spring-boot-starter-parent`. Essa escolha é fundamental por diversos motivos:
 
 -   **Produtividade:** Spring Boot oferece uma experiência de desenvolvimento rápida e simplificada com auto-configuração, starters e um servidor embarcado (Tomcat por padrão), eliminando a necessidade de configurações complexas.
     
@@ -627,11 +627,9 @@ A escolha do **Java 21** como a versão do JDK é estratégica:
 
 O `pom.xml` faz uso extensivo dos "Starters" do Spring Boot, que são conjuntos de dependências pré-configuradas para funcionalidades comuns.
 
--   **`spring-boot-starter-data-jpa`**: Habilita a persistência de dados utilizando JPA (Java Persistence API) com Hibernate como implementação padrão. Isso permite interagir com bancos de dados relacionais de forma orientada a objetos, minimizando o código boilerplate.
+-   **`mybatis**: Em vez de JPA/Hibernate, este starter habilita o uso do MyBatis. O MyBatis é um framework de mapeamento SQL que oferece um controle mais fino sobre as consultas SQL. Ele permite que você escreva SQL puro em arquivos XML ou anotações Java e mapeie os resultados diretamente para objetos Java. É uma escolha flexível para persistência, ideal quando há necessidade de otimizar consultas complexas ou interagir com stored procedures.
     
 -   **`spring-boot-starter-validation`**: Adiciona suporte à validação de dados usando a Bean Validation API (JSR 380). Isso é crucial para garantir que os dados recebidos via API REST estejam em um formato e conteúdo válidos, melhorando a robustez da aplicação.
-    
--   **`spring-boot-starter-security`**: Integra o Spring Security, fornecendo um robusto framework para autenticação e autorização. Essencial para proteger os endpoints da API, gerenciando acesso baseado em roles (ADMIN/USER) e implementando a lógica de login/registro.
     
 -   **`spring-boot-starter-web`**: Inclui todas as dependências necessárias para construir aplicações web e APIs RESTful, como Spring MVC e o servidor Tomcat embarcado. É a base para expor os endpoints da sua aplicação.
     
@@ -657,9 +655,7 @@ O `pom.xml` faz uso extensivo dos "Starters" do Spring Boot, que são conjuntos 
 
 ---
 
-### 5\. Segurança e Documentação da API
-
--   **`com.auth0:java-jwt`**: Biblioteca para a geração e validação de JWTs. É fundamental para a segurança da API, permitindo a autenticação de usuários e a proteção de rotas. A escolha do JWT para autenticação é alinhada com as melhores práticas para APIs RESTful sem estado, o que se adapta muito bem a ambientes conteinerizados.
+### 5\. Documentação da API
     
 -   **`org.springdoc:springdoc-openapi-starter-webmvc-ui`**: Habilita a geração automática de documentação da API no formato OpenAPI (Swagger). Isso permite que você acesse uma UI interativa (`/swagger-ui/index.html`) para testar e entender os endpoints da sua API, facilitando a integração com outros desenvolvedores e sistemas.
     
