@@ -47,7 +47,7 @@
         
     -   [5 Gerenciamento de Produtos Favoritos](#user-content-5-gerenciamento-de-produtos-favoritos)
 
--   [Escolhas Tecnológicas no Projeto Desafio Backend Magaluiza](#user-content-escolhas-tecnológicas-no-projeto-desafio-backend-magaluiza)
+-   [Escolhas Tecnológicas no Projeto Desafio Backend](#user-content-escolhas-tecnológicas-no-projeto-desafio-backend)
     
     -   [1\. Base do Projeto: Spring Boot e Java 21](#user-content-1-base-do-projeto-spring-boot-e-java-21)
         
@@ -329,8 +329,8 @@ Agora que suas ferramentas estão instaladas, vamos preparar o projeto.
     Bash
     
     ```
-    git clone https://github.com/renatotn7/desafioBackendMagLuiza.git
-    cd desafioBackendMagLuiza
+    git clone https://github.com/renatotn7/SRM.git
+    cd SRM
     ```
     
 2.  **Compilar o JAR Executável:**
@@ -436,7 +436,7 @@ Com este guia, você deve conseguir configurar seu ambiente, rodar a aplicação
 
 ## Guia da API
 
-Este documento detalha as funcionalidades da API "Desafio Backend Magazine Luiza", cobrindo autenticação, gerenciamento de usuários, clientes e produtos favoritos.
+Este documento detalha as funcionalidades da API "Desafio Backend", cobrindo autenticação, gerenciamento de usuários, clientes e produtos favoritos.
 
 ---
 
@@ -604,7 +604,7 @@ segue um diagrama:
  ![Diagrama de fluxo](diag_fluxo.png)
 ---
 
-## Escolhas Tecnológicas no Projeto Desafio Backend Magaluiza
+## Escolhas Tecnológicas no Projeto Desafio Backend
 
 Este documento detalha as principais escolhas tecnológicas e dependências configuradas no arquivo `pom.xml` do projeto "Desafio SRM", explicando o racional por trás de cada uma, com foco no uso do Java 21 e na compatibilidade com Docker.
 
