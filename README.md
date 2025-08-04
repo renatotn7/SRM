@@ -540,7 +540,17 @@ Realiza a operação principal de conversão de moedas, gerando uma transação.
 | `POST`    | `/api/v1/conversoes`        | Realiza a conversão de um valor. 
 ---
 
+### 8. Histórico
+
+Consulta o histórico de transações, permitindo filtros por diversos parâmetros.
+
+| Método    | Caminho                   | Descrição                                 | Requisição                                 | Resposta                   |
+| :-------- | :------------------------ | :---------------------------------------- | :----------------------------------------- | :------------------------- |
+| `GET`     | `/api/v1/historico`       | Consulta o histórico de transações com filtros. | Query Params: `moedaId`, `moedaOrigemId`, `moedaDestinoId`, `dataInicial`, `dataFinal`, `produtoId` | `List<TransacaoResponse>` |
+
+
 ### Explicacao do fluxo do programa
+
 
 # Fluxo de Operações da API SRM Wefin
 
@@ -586,6 +596,7 @@ Com todos os dados de suporte em vigor, o fluxo principal é a conversão. Quand
 
 ---
 
+
 ## 4. Geração do Histórico
 
 Por fim, após a conversão ser concluída com sucesso, o sistema registra a operação:
@@ -593,6 +604,22 @@ Por fim, após a conversão ser concluída com sucesso, o sistema registra a ope
 * **Geração da Transação**: O serviço de conversão cria e salva uma nova `Transacao` no banco de dados, documentando a operação realizada. Isso inclui detalhes como o valor original, o valor convertido, as moedas utilizadas, o produto, e a data/hora.
 
 Em resumo, a ordem de dependência é: **Moedas/Produtos** -> **Taxas de Câmbio/Regras de Conversão** -> **Conversão** -> **Transação**.
+
+--- 
+
+## 5. Consulta avancada de Histórico
+
+O serviço de histórico permite consultar transações passadas, utilizando diversos filtros.
+
+* **Endpoint**: `GET /api/v1/historico`
+* **Requisição**: Recebe os parâmetros de filtro como query parameters que são opcionais viram filtros quando utilizados.
+    * **Parâmetros**: `moedaId`, `moedaOrigemId`, `moedaDestinoId`, `dataInicial`, `dataFinal`, `produtoId`.
+* **Lógica do Serviço**:
+    1.  O serviço recebe os parâmetros de busca e realiza as validações de entrada (e.g., `dataFinal` não pode ser anterior a `dataInicial`).
+    2.  O serviço executa a consulta no banco de dados, buscando transações que correspondam aos filtros fornecidos.
+    3.  Retorna uma lista de `Transacoes`.
+
+---
 
 segue um diagrama:
 
