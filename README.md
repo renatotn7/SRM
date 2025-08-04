@@ -688,7 +688,8 @@ A arquitetura do projeto, com um JAR autônomo e o uso de `Dockerfile` para cont
 
 A seguir, está o esquema (schema) do banco de dados em formato Markdown, detalhando as tabelas, seus campos, restrições e dados de exemplo.
 
-O mesmo conteúdo abaixo(sem as marcacoes markdown) pode ser visto em [arquivo de criacao](https://github.com/renatotn7/SRM/blob/main/src/main/resources/db/migration/v1__create_tables.sql), [arquivo de inserts](https://github.com/renatotn7/SRM/blob/main/src/main/resources/db/migration/v2__inserts_padrao.sql)
+O mesmo conteúdo abaixo(sem as marcacoes markdown) pode ser visto em [arquivo de criacao](https://github.com/renatotn7/SRM/blob/main/src/main/resources/db.migration/V1__create_tables.sql), [arquivo de inserts](https://github.com/renatotn7/SRM/blob/main/src/main/resources/db.migration/v2__inserts_padrao.sql)
+
 
 
 ---
