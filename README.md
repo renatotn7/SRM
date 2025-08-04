@@ -441,160 +441,169 @@ Este documento detalha as funcionalidades da API "Desafio Backend Magazine Luiza
 ---
 
 ### 1\. Acesso à Documentação Interativa (Swagger UI)
-Você pode acessar a documentação swagger da API para explorar todos os endpoints através desse documento swagger.json.
-Para realizar testes basta importar no Postman por exemplo ou uma outra ferramenta de consulta de apis que possa rodar local
-O json se encontra aqui:  [swagger.json](swagger.json).
+Você pode acessar a documentação swagger da API para explorar todos os endpoints através desse da api interativa que quando a aplicacao estiver rodando estará disponivel em: http://localhost:8081/swagger-ui/index.html`
+
+---
+# Guia da API SRM Wefin
+
+A API SRM Wefin fornece um conjunto de endpoints RESTful para gerenciar recursos essenciais como produtos, moedas, reinos, taxas de câmbio e regras de conversão.
+
+## Estrutura da API
+
+* **URL Base:** `http://localhost:8081/api/v1`
+* **Formato de Dados:** JSON
+* **Autenticação:** (Não implementada neste guia, mas seria feito para uso em produção).
 
 ---
 
-### 2\. Autenticação e Registro de Usuários
+## Erros
 
-A API utiliza JWT (JSON Web Token) para autenticação.
+A API utiliza códigos de status HTTP padrão para indicar o resultado das operações.
 
-#### 2.1. Registro de Usuários
-
-Crie novos usuários com diferentes níveis de acesso. obrigatório pois na aplicacao não há usuários quando inicia. Crie dois, um ADM e um USER
-
--   **Endpoint:** `POST /auth/v1/register`
-    
--   **Corpo da Requisição (JSON):**
-    
-    JSON
-    
-    ```
-    {
-      "login": "nomeDeUsuario",
-      "password": "suaSenha",
-      "role": "ADMIN"  // ou "USER"
-    }
-    ```
-    
--   **Roles Disponíveis:**
-    
-    -   `ADMIN`: Possui acesso total a todos os endpoints.
-        
-    -   `USER`: Possui acesso limitado, principalmente aos endpoints de produtos.
-        
-
-#### 2.2. Login de Usuários
-
-Autentique-se para obter um token JWT.
-
--   **Endpoint:** `POST /auth/v1/login`
-    
--   **Corpo da Requisição (JSON):**
-    
-    JSON
-    
-    ```
-    {
-      "login": "nomeDeUsuario",
-      "password": "suaSenha"
-    }
-    ```
-    
--   **Resposta:** Um **token JWT assinado digitalmente**. Este token é essencial para acessar os endpoints protegidos.
-    
-
-#### 2.3. Uso do Token JWT
-
-Para acessar os demais serviços da API, inclua o token JWT obtido no login no cabeçalho `Authorization` de suas requisições, prefixado com `Bearer`.
-
--   **Exemplo de Cabeçalho:**
-    
-    ```
-    Authorization: Bearer SEU_TOKEN_JWT_AQUI
-    ```
-    
+| Código de Status | Descrição                                                                         |
+| :--------------- | :---------------------------------------------------------------------------------- |
+| `200 OK`         | A requisição foi bem-sucedida.                                                      |
+| `201 Created`    | Um novo recurso foi criado com sucesso.                                             |
+| `204 No Content` | A requisição foi bem-sucedida e não há conteúdo a ser retornado (e.g., exclusão).   |
+| `400 Bad Request` | A requisição é inválida (e.g., dados incorretos, validação falhou).                 |
+| `404 Not Found`  | O recurso solicitado não foi encontrado.                                            |
+| `409 Conflict`   | A requisição não pôde ser concluída devido a um conflito (e.g., recurso duplicado).  |
+| `500 Internal Server Error` | Ocorreu um erro inesperado no servidor.                                     |
 
 ---
 
-### 3\. Gerenciamento de Produtos
+## Endpoints
 
-Estes endpoints permitem a consulta de produtos, que são obtidos de uma API externa (FakeStoreAPI).
+### 1. Produtos
 
--   **Acesso:** Disponível para usuários com as roles **`ADMIN`** ou **`USER`**.
-    
--   **Listar Todos os Produtos:**
-    
-    -   `GET /api/v1/products`
-        
-        -   Obtém uma lista de todos os produtos disponíveis na API externa.
-            
--   **Obter Um Único Produto:**
-    
-    -   `GET /api/v1/products/{id}`
-        
-        -   Obtém os detalhes de um produto específico, utilizando seu ID.
-            
+Gerenciamento de produtos, que são utilizados nas regras de conversão.
+
+| Método    | Caminho                   | Descrição                    | Requisição      | Resposta             |
+| :-------- | :------------------------ | :--------------------------- | :-------------- | :------------------- |
+| `POST`    | `/api/v1/produtos`        | Cria um novo produto.        | `ProdutoRequest`| `ProdutoResponse`    |
+| `GET`     | `/api/v1/produtos`        | Lista todos os produtos.     | -               | `List<ProdutoResponse>` |
+| `GET`     | `/api/v1/produtos/{id}`   | Busca um produto por ID.     | -               | `ProdutoResponse`    |
+| `DELETE`  | `/api/v1/produtos/{id}`   | Deleta um produto por ID.    | -               | `204 No Content`     |
+
+### 2. Moedas
+
+Gerenciamento de moedas, utilizadas em todas as operações financeiras.
+
+| Método    | Caminho                 | Descrição                | Requisição    | Resposta           |
+| :-------- | :---------------------- | :----------------------- | :------------ | :----------------- |
+| `POST`    | `/api/v1/moedas`        | Cria uma nova moeda.     | `MoedaRequest`| `MoedaResponse`    |
+| `GET`     | `/api/v1/moedas`        | Lista todas as moedas.   | -             | `List<MoedaResponse>`|
+| `GET`     | `/api/v1/moedas/{id}`   | Busca uma moeda por ID.  | -             | `MoedaResponse`    |
+| `DELETE`  | `/api/v1/moedas/{id}`   | Deleta uma moeda por ID. | -             | `204 No Content`   |
+
+### 3. Reinos
+
+Gerenciamento de reinos, que podem ser associados a produtos.
+
+| Método    | Caminho                 | Descrição                | Requisição    | Resposta          |
+| :-------- | :---------------------- | :----------------------- | :------------ | :---------------- |
+| `POST`    | `/api/v1/reinos`        | Cria um novo reino.      | `ReinoRequest`| `ReinoResponse`   |
+| `GET`     | `/api/v1/reinos`        | Lista todos os reinos.   | -             | `List<ReinoResponse>`|
+| `GET`     | `/api/v1/reinos/{id}`   | Busca um reino por ID.   | -             | `ReinoResponse`   |
+| `DELETE`  | `/api/v1/reinos/{id}`   | Deleta um reino por ID.  | -             | `204 No Content`  |
+
+### 4. Regras de Conversão
+
+Gerenciamento das regras que definem o fator de ajuste entre um par de moedas e um produto.
+
+| Método    | Caminho                 | Descrição               | Requisição            | Resposta                   |
+| :-------- | :---------------------- | :---------------------- | :-------------------- | :------------------------- |
+| `POST`    | `/api/v1/regras`        | Cria uma nova regra.    | `RegraConversaoRequest`| `RegraConversaoResponse` |
+| `GET`     | `/api/v1/regras`        | Lista todas as regras.  | -                     | `List<RegraConversaoResponse>` |
+| `DELETE`  | `/api/v1/regras/{id}`   | Deleta uma regra por ID.| -                     | `204 No Content`           |
+
+### 5. Taxas de Câmbio
+
+Gerenciamento das taxas de câmbio de mercado.
+
+| Método    | Caminho                 | Descrição                                 | Requisição                                 | Resposta                 |
+| :-------- | :---------------------- | :---------------------------------------- | :----------------------------------------- | :----------------------- |
+| `POST`    | `/api/v1/taxas`         | Cria uma nova taxa.                       | `TaxaCambioRequest`                        | `TaxaCambioResponse`     |
+| `GET`     | `/api/v1/taxas`         | Busca a taxa mais recente para um par de moedas. | Query Params: `moedaOrigem`, `moedaDestino`| `TaxaCambioResponse`     |
+
+### 6. Transações
+
+Busca de transações realizadas. As transações são geradas por outras operações.
+
+| Método    | Caminho                     | Descrição                               | Requisição                                                     | Resposta                   |
+| :-------- | :-------------------------- | :-------------------------------------- | :------------------------------------------------------------- | :------------------------- |
+| `GET`     | `/api/v1/transacoes`        | Lista todas as transações.              | -                                                              | `List<TransacaoResponse>`  |
+| `GET`     | `/api/v1/transacoes/{id}`   | Busca uma transação por ID.             | -                                                              | `TransacaoResponse`        |
+| `GET`     | `/api/v1/transacoes/search` | Busca transações com filtros avançados. | Query Params: `moedaOrigemId`, `moedaDestinoId`, `dataInicial`, etc. | `List<TransacaoResponse>`  |
+
+### 7. Conversão
+
+Realiza a operação principal de conversão de moedas, gerando uma transação.
+
+| Método    | Caminho                     | Descrição                              | Requisição        | Resposta             |
+| :-------- | :-------------------------- | :------------------------------------- | :---------------- | :------------------- |
+| `POST`    | `/api/v1/conversoes`        | Realiza a conversão de um valor. 
+---
+
+### Explicacao do fluxo do programa
+
+# Fluxo de Operações da API SRM Wefin
+
+Este guia detalha a sequência lógica das operações na API, começando pelos recursos básicos até a operação principal de conversão.
+
+## 1. Criação dos Recursos Base
+
+Primeiro, crie os blocos de construção fundamentais do sistema. Esses recursos são independentes um do outro.
+
+* **Moedas**: Crie as moedas que serão utilizadas nas conversões (e.g., USD, EUR, Gold, Mana).
+    * **Endpoint**: `POST /api/v1/moedas`
+* **Produtos**: Crie os produtos que terão regras de conversão específicas (e.g., Espada Mágica, Poção de Cura).
+    * **Endpoint**: `POST /api/v1/produtos`
+* **Reinos**: Crie os reinos para associar a produtos ou outras entidades, se necessário.
+    * **Endpoint**: `POST /api/v1/reinos`
 
 ---
 
-### 4\. Gerenciamento de Clientes
+## 2. Definição das Regras de Mercado e de Negócio
 
-Estes endpoints permitem operações CRUD (Criação, Leitura, Atualização e Exclusão) sobre os clientes.
+Com as moedas e produtos criados, você pode definir as regras que o sistema usará para as conversões.
 
--   **Acesso:** Restrito apenas a usuários com a role **`USER`**.
-    
--   **Criar um Cliente:**
-    
-    -   `POST /api/v1/clients`
-        
-        -   Cria um novo registro de cliente.
-            
--   **Obter Todos os Clientes:**
-    
-    -   `GET /api/v1/clients`
-        
-        -   Lista todos os clientes cadastrados.
-            
--   **Obter Um Único Cliente:**
-    
-    -   `GET /api/v1/clients/{id}`
-        
-        -   Obtém os detalhes de um cliente específico pelo seu ID.
-            
--   **Atualizar um Cliente:**
-    
-    -   `PUT /api/v1/clients/{id}`
-        
-        -   Atualiza as informações de um cliente existente.
-            
--   **Deletar um Cliente:**
-    
-    -   `DELETE /api/v1/clients/{id}`
-        
-        -   Remove um cliente do sistema pelo seu ID.
-            
+* **Taxas de Câmbio**: Crie as taxas de câmbio de mercado entre pares de moedas. Este é o valor de referência sem nenhum ajuste.
+    * **Depende de**: 2 Moedas (origem e destino).
+    * **Endpoint**: `POST /api/v1/taxas`
+
+* **Regras de Conversão**: Crie as regras de negócio que aplicam um fator de ajuste a uma taxa de câmbio, específico para um determinado produto.
+    * **Depende de**: 1 Produto
+    * **Endpoint**: `POST /api/v1/regras`
 
 ---
 
-### 5\. Gerenciamento de Produtos Favoritos
+## 3. A Operação Principal: A Conversão
 
-Estes endpoints permitem que os usuários gerenciem sua lista de produtos favoritos.
+Com todos os dados de suporte em vigor, o fluxo principal é a conversão. Quando uma requisição de conversão é feita, o sistema executa a seguinte sequência de lógica:
 
--   **Acesso:** Restrito apenas a usuários com a role **`USER`**.
-    
--   **Adicionar um Produto Favorito:**
-    
-    -   `POST /api/v1/favorites`
-        
-        -   Adiciona um produto à lista de favoritos de um cliente.
-            
--   **Listar Favoritos por Cliente:**
-    
-    -   `GET /api/v1/favorites/client/{clientId}`
-        
-        -   Lista todos os produtos favoritos de um cliente específico.
-            
--   **Deletar um Produto Favorito:**
-    
-    -   `DELETE /api/v1/favorites/{favoriteId}`
-        
-        -   Remove um produto da lista de favoritos, utilizando o ID do registro de favorito (não o ID do produto).
-          
+* **Endpoint**: `POST /api/v1/conversoes`
+* **Requisição**: Recebe o `valor` a ser convertido, o `produto` envolvido e as moedas de origem e destino.
+* **Lógica do Serviço**:
+    1.  O serviço busca a **taxa de câmbio mais recente** para o par de moedas especificado (`TaxaCambio`).
+    2.  Em seguida, ele busca a **regra de conversão específica** para o produto e o par de moedas (`RegraConversao`).
+    3.  O valor final é calculado usando a fórmula: **`Valor Convertido = Valor Original * Taxa de Câmbio * Fator de Ajuste da Regra`**.
 
 ---
+
+## 4. Geração do Histórico
+
+Por fim, após a conversão ser concluída com sucesso, o sistema registra a operação:
+
+* **Geração da Transação**: O serviço de conversão cria e salva uma nova `Transacao` no banco de dados, documentando a operação realizada. Isso inclui detalhes como o valor original, o valor convertido, as moedas utilizadas, o produto, e a data/hora.
+
+Em resumo, a ordem de dependência é: **Moedas/Produtos** -> **Taxas de Câmbio/Regras de Conversão** -> **Conversão** -> **Transação**.
+
+segue um diagrama:
+
+ ![Diagrama de fluxo](diag_fluxo.png)
+---
+
 ## Escolhas Tecnológicas no Projeto Desafio Backend Magaluiza
 
 Este documento detalha as principais escolhas tecnológicas e dependências configuradas no arquivo `pom.xml` do projeto "Desafio SRM", explicando o racional por trás de cada uma, com foco no uso do Java 21 e na compatibilidade com Docker.
