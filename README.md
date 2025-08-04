@@ -677,3 +677,7 @@ A arquitetura do projeto, com um JAR autônomo e o uso de `Dockerfile` para cont
 -   **Isolamento:** Docker oferece isolamento para a aplicação e suas dependências, incluindo o banco de dados PostgreSQL (via Docker Compose), o que simplifica o setup e o deploy.
     
 -   **Desenvolvimento e Produção Similares:** O uso de Docker Compose para orquestrar a aplicação e o banco de dados em desenvolvimento espelha de perto como a aplicação será implantada em produção, reduzindo surpresas.
+-   
+
+### 7\. Diagrama ER
+ ![Diagrama ER](Diagrama ER wefin.png)
