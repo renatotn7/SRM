@@ -59,6 +59,7 @@
 # Guia de Configuração e Execução do Desafio do Reino de Wefin
 
 Este documento irá guiá-lo através da configuração do ambiente de desenvolvimento, compilação do projeto com Maven, execução da aplicação e seu banco de dados PostgreSQL usando Docker Compose, e como acessar o banco de dados dentro do container.
+(O código foi feito seguindo as práticas Clean Code)
 
 ## 1\. Pré-requisitos: Instalação de Ferramentas Essenciais
 
