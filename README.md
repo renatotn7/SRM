@@ -32,20 +32,10 @@
 -   [Guia da API](#user-content-guia-da-api)
     
     -   [1 Acesso à Documentação Interativa (Swagger UI)](#user-content-1-acesso-à-documentação-interativa-swagger-ui)
-        
-    -   [2 Autenticação e Registro de Usuários](#user-content-2-autenticação-e-registro-de-usuários)
-        
-        -   [2.1. Registro de Usuários](#user-content-21-registro-de-usuários)
-            
-        -   [2.2. Login de Usuários](#user-content-22-login-de-usuários)
-            
-        -   [2.3. Uso do Token JWT](#user-content-23-uso-do-token-jwt)
-            
-    -   [3 Gerenciamento de Produtos](#user-content-3-gerenciamento-de-produtos)
-        
-    -   [4 Gerenciamento de Clientes](#user-content-4-gerenciamento-de-clientes)
-        
-    -   [5 Gerenciamento de Produtos Favoritos](#user-content-5-gerenciamento-de-produtos-favoritos)
+
+    -   [Guia da API SRM Wefin](#user-content-guia-da-api-srm-wefin)
+
+    -   [Fluxo de Operações da API SRM Wefin](#user-content-fluxo-de-operações-da-api-srm-wefin)
 
 -   [Escolhas Tecnológicas no Projeto Desafio Backend](#user-content-escolhas-tecnológicas-no-projeto-desafio-backend)
     
@@ -60,6 +50,10 @@
     -   [5\. Documentação da API](#user-content-5-documentação-da-api)
         
     -   [6\. Estratégia de Build com Maven e Docker](#user-content-6-estratégia-de-build-com-maven-e-docker)
+ 
+    -   [Diagrama ER](user-content-7-diagrama-er)
+ 
+    -   [Codigo SQL (PostgreSql)](#user-content-8-codigo-sql-postgresql)
         
 
 # Guia de Configuração e Execução do Desafio do Reino de Wefin
@@ -688,11 +682,11 @@ A arquitetura do projeto, com um JAR autônomo e o uso de `Dockerfile` para cont
 -   **Desenvolvimento e Produção Similares:** O uso de Docker Compose para orquestrar a aplicação e o banco de dados em desenvolvimento espelha de perto como a aplicação será implantada em produção, reduzindo surpresas.
 -   
 
-### 7\. Diagrama ER
+### Diagrama ER
  ![Diagrama ER](diag_wefin.png)
 
 
-### 8\. Codigo SQL (PostgresSql)
+### Codigo SQL (PostgreSql)
 
 
 A seguir, está o esquema (schema) do banco de dados em formato Markdown, detalhando as tabelas, seus campos, restrições e dados de exemplo.
