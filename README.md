@@ -51,9 +51,9 @@
         
     -   [6\. Estratégia de Build com Maven e Docker](#user-content-6-estratégia-de-build-com-maven-e-docker)
  
-    -   [Diagrama ER](user-content-7-diagrama-er)
+    -   [Diagrama ER](#user-content-diagrama-er)
  
-    -   [Codigo SQL (PostgreSql)](#user-content-8-codigo-sql-postgresql)
+    -   [Codigo SQL (PostgreSql)](#user-content-codigo-sql-postgresql)
         
 
 # Guia de Configuração e Execução do Desafio do Reino de Wefin
